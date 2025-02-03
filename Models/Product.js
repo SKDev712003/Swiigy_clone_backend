@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema({
             enum:['veg', 'non-veg']
         }]
     },
-    bestSeller:{
+    bestseller:{
         type:Boolean
     },
     description:{

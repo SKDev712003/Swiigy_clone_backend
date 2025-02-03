@@ -34,12 +34,18 @@ const Addfirm = async(req,res)=>{
         firmname, area, category, region, offer, image, vendor:vendor._id
     })
 
+    
+
     const savedFirm = await firm.save()
+    const firmId = savedFirm._id
+    
     vendor.firm.push(savedFirm)
     await vendor.save()
-    res.status(200).send({message:"firm added successfully"})
+    
+    const resturantName = savedFirm.firmname
+    res.status(200).send({message:"firm added successfully",firmId, resturantName})
+    }
 
-}
     
    } catch (error) {
 
