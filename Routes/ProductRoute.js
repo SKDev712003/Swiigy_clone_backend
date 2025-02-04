@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post('/add-product/:id', ProductController.AddProduct)
 router.post('/:imageName', (req,res)=>{
-    const imageName = req.params.imageName;
+    const imageName = req.file.imageName;
     res.headersSent('Content-Type', 'image/jpeg')
     res.sendFile(path.join(__dirname,'..','uploads',imageName))
 

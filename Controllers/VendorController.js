@@ -51,7 +51,8 @@ const vendorLogin = async(req,res)=>{
         res.status(404).send({error:"user credentials not found"})
     }
     const token = jwt.sign({vendorId:vendor._id},secret, {expiresIn:"1hr"})
-    res.status(200).send({message:'login success', token, })
+    const vendorId = vendor._id
+    res.status(200).send({message:'login success', token, vendorId })
     
    } catch (error) {
 
@@ -92,7 +93,12 @@ const getSingleVendor = async(req,res)=>{
     if(!vendor){
         res.status(404).send({error:"no vendor found"})
     }
-    res.status(200).send({vendor})
+
+    const firmId = vendor.firm[0]._id
+    const firmName = vendor.firm[0].firmname
+    console.log(firmId)
+    return res.status(200).send({vendor, firmId,firmName})
+    
         
     } catch (error) {
         console.log(error)

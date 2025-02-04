@@ -7,7 +7,7 @@ const path = require('path')
 const storage = multer.diskStorage({
     destination:'uploads/',
     filename:(req,file,cb)=>{
-        cb(null,Date.now()+'_'+path.extname(file.filename))
+        cb(null,Date.now()+'_'+path.extname(file.originalname))
     }
 
 })
@@ -19,7 +19,7 @@ const Addfirm = async(req,res)=>{
    try {
 
     const {firmname, area, category, region, offer} = req.body
-    const image = req.file ? file.filename:undefined
+    const image = req.file ? req.file.filename:undefined
 
     const vendor = await Vendor.findById(req.vendorId)
     if(!vendor){
@@ -44,8 +44,8 @@ const Addfirm = async(req,res)=>{
     
     const resturantName = savedFirm.firmname
     res.status(200).send({message:"firm added successfully",firmId, resturantName})
+    
     }
-
     
    } catch (error) {
 
