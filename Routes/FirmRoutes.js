@@ -6,9 +6,9 @@ const router = express.Router()
 
 
 router.post('/add-firm',VerifyToken, FirmController.Addfirm)
-router.post('/:imageName',(req,res)=>{
-    const imageName = req.file.imageName
-    res.headersSent('Content-Type','image/jpeg')
+router.get('uploads/:imageName',(req,res)=>{
+    const imageName = req.params.imageName
+    res.header('Content-Type','image/jpeg')
     res.sendFile(path.join(__dirname,'..','uploads',imageName))
 })
 router.delete('/deleteFirm/:id',FirmController.deleteFirmbyId)

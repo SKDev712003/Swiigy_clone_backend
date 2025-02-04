@@ -10,12 +10,13 @@ const path = require('path')
 const storage = multer.diskStorage({
     destination:'uploads/',
     filename:(req,file,cb)=>{
-        cb(null, Date.now()+'__'+path.extname(file.originalname))
+        cb(null,Date.now()+'_'+path.extname(file.originalname))
     }
+
 })
 
-const upload = multer({storage:storage})
 
+const upload = multer({storage:storage})
 
 const AddProduct = async(req,res)=>{
     try {
@@ -33,7 +34,7 @@ const AddProduct = async(req,res)=>{
 
 
         const product = new Product({
-            productname, price, category, bestseller, description, firm:firm._id
+            productname, price, category, bestseller, description, firm:firm._id, image
         })
 
         const savedfirm = await product.save()
