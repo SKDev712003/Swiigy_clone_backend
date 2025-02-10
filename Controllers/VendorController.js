@@ -107,4 +107,30 @@ const getSingleVendor = async(req,res)=>{
     }
 }
 
-module.exports = {vendorRegister, vendorLogin, getAllVendors, getSingleVendor}
+
+const deleteVendorById = async(req,res)=>{
+   try {
+    const vendorId = req.params.id
+    const vendor = await Vendor.findByIdAndDelete(vendorId)
+    if(!vendor){
+        return res.status(404).send({error:"vendor not found"})
+    }
+    return res.status(200).send({message:"vendor deleted successfully"})
+    
+   } catch (error) {
+    console.log(error)
+    res.status(500).json({error:"Internal server error occured"})
+    
+   }
+
+}
+
+
+
+
+
+
+
+
+
+module.exports = {vendorRegister, vendorLogin, getAllVendors, getSingleVendor, deleteVendorById}
